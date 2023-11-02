@@ -47,7 +47,6 @@ class _CreateForm extends StatelessWidget {
             autocorrect: false,
             keyboardType: TextInputType.text,
             initialValue: estudiantesProvider.nombre,
-            // keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               hintText: 'Digite su nombre', //pista o placeholder
               labelText: 'Nombre',
@@ -62,7 +61,6 @@ class _CreateForm extends StatelessWidget {
           TextFormField(
             autocorrect: false,
             initialValue: estudiantesProvider.edad,
-            // keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               hintText: 'Digite su edad', //pista o placeholder
               labelText: 'Edad',
@@ -84,9 +82,6 @@ class _CreateForm extends StatelessWidget {
             onPressed: estudiantesProvider.isLoading
                 ? null
                 : () {
-                    //Quitar teclado al terminar
-                    FocusScope.of(context).unfocus();
-
                     if (!estudiantesProvider.isValidForm()) return;
 
                     if (estudiantesProvider.createOrUpdate == 'create') {

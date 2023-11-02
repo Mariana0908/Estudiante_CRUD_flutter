@@ -1,3 +1,5 @@
+//Crea un modelo para la clase, que permitirá definir las caracteristicas de nuetsros objetos (estudiante).
+
 import 'dart:convert';
 
 Estudiante estudianteFromJson(String str) =>

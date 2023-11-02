@@ -1,3 +1,4 @@
+//Crea mi base de datos
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -22,15 +23,10 @@ class DBProvider {
   }
 
   Future<Database> initDB() async {
-    //Obteniendo direccion base donde se guardará la base de datos
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    Directory documentsDirectory =
+        await getApplicationDocumentsDirectory(); //dirección BD
 
-    //Armamos la url donde quedará la base de datos
     final path = join(documentsDirectory.path, 'EstudiantesDB.db');
-
-    //Imprimos ruta
-    print(path);
-
     return await openDatabase(
       path,
       version: 1,
@@ -56,8 +52,7 @@ class DBProvider {
     final String nombre = estudiante.nombre;
     final String edad = estudiante.edad;
 
-    final db =
-        await database; //Recibimos instancia de base de datos para trabajar con ella
+    final db = await database;
 
     final int res = await db.rawInsert('''
 
@@ -76,31 +71,30 @@ class DBProvider {
     return res;
   }
 
-  //Obtener un registro por id
   Future<Estudiante?> obtenerEstudianteId(int id) async {
     final Database db = await database;
 
     //usando Query para construir la consulta, con where y argumentos posicionales (whereArgs)
     final res = await db.query('estudiantes', where: 'id = ?', whereArgs: [id]);
     print(res);
-    //Preguntamos si trae algun dato. Si lo hace
-    return res.isNotEmpty ? Estudiante.fromJson(res.first) : null;
+
+    return res.isNotEmpty
+        ? Estudiante.fromJson(res.first)
+        : null; //si trae datos que los vuela json
   }
 
   Future<List<Estudiante>> obtenerTodosLosEstudiantes() async {
     final Database? db = await database;
     final res = await db!.query('estudiantes');
-    //Transformamos con la funcion map instancias de nuestro modelo. Si no existen registros, devolvemos una lista vacia
     return res.isNotEmpty
         ? res
             .map((n) => Estudiante.fromJson(n))
-            .toList() //trae todos los estudiantes y los pone en una lista
+            .toList() //para hacer una lista con los datos que traiga
         : [];
   }
 
   Future<int> actualizarEstudiante(Estudiante estudiante) async {
     final Database db = await database;
-    //con , se usa el nombre de la tabla, seguido de los valores en formato de Mapa, seguido del where con parametros posicionales y los argumentos finales
     final res = await db.update('estudiantes', estudiante.toJson(),
         where: 'id = ?', whereArgs: [estudiante.id]);
     return res;

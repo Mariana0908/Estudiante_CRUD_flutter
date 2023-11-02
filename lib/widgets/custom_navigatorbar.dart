@@ -15,7 +15,6 @@ class MenuUsuario extends StatelessWidget {
     final currentIndex = actualOptionProvider.selectedOption;
 
     return BottomNavigationBar(
-      //Current Index, para determinar el botón que debe marcarse
       currentIndex: currentIndex,
       onTap: (int i) {
         if (i == 1) {
@@ -23,10 +22,10 @@ class MenuUsuario extends StatelessWidget {
         }
         actualOptionProvider.selectedOption = i;
       },
-      //Items
       items: const <BottomNavigationBarItem>[
+        //Para listar los dos elementos de la barra de navegación (botones)
         BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_rounded), label: "Lista de estudiantes"),
+            icon: Icon(Icons.list_alt_rounded), label: "Listar estudiantes"),
         BottomNavigationBarItem(
             icon: Icon(Icons.add_reaction), label: "Crear un estudiante")
       ],
