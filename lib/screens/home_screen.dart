@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_crud_local_app/providers/notes_provider.dart';
-import 'package:notes_crud_local_app/screens/create_note_screen.dart';
-import 'package:notes_crud_local_app/screens/list_notes_screen.dart';
+import 'package:notes_crud_local_app/providers/provider_estudiante.dart';
+import 'package:notes_crud_local_app/screens/crear_estudiante_screen.dart';
+import 'package:notes_crud_local_app/screens/lista_estudiante_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/actual_option_provider.dart';
@@ -14,10 +14,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text("Home Notas")),
+          title: const Center(child: Text("Base de datos - Estudiantes")),
         ),
         body: _HomeScreenBody(),
-        bottomNavigationBar: const CustomNavigatorBar());
+        bottomNavigationBar: const MenuUsuario());
   }
 }
 
@@ -31,11 +31,11 @@ class _HomeScreenBody extends StatelessWidget {
 
     switch (selectedOption) {
       case 0:
-        return const ListNotesScreen();
+        return const ListaEstudiantesScreen();
       case 1:
-        return const CreateNoteScreen();
+        return const CrearEstudiantesScreen();
       default:
-        return const ListNotesScreen();
+        return const ListaEstudiantesScreen();
     }
   }
 }
