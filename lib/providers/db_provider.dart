@@ -100,7 +100,7 @@ class DBProvider {
 
   Future<int> actualizarEstudiante(Estudiante estudiante) async {
     final Database db = await database;
-    //con updates, se usa el nombre de la tabla, seguido de los valores en formato de Mapa, seguido del where con parametros posicionales y los argumentos finales
+    //con , se usa el nombre de la tabla, seguido de los valores en formato de Mapa, seguido del where con parametros posicionales y los argumentos finales
     final res = await db.update('estudiantes', estudiante.toJson(),
         where: 'id = ?', whereArgs: [estudiante.id]);
     return res;
